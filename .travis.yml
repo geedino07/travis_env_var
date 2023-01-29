@@ -12,15 +12,15 @@ install:
 # Scripts to be run such as tests
 before_script:
   - echo "no tests"
-  - echo "my favorite food is $FAVORITE_FOOD"
+  - echo "my favorite food is $NAME"
 
 script:
   - docker --version # print the version for logging
-  - docker build -t simple-node .
-#  - docker tag simple-node YOUR_DOCKER_HUB/simple-node:latest
+  - docker build -t simple-node  --build-arg NAME=${NAME} .
+  - docker tag simple-node geedino07/simple-node:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#  - docker push YOUR_DOCKER_HUB/simple-node
+  - docker push geedino07/simple-node
 
   
